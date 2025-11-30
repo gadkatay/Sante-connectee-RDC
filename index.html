@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Santé Connectée RDC - Infographie Interactive</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#67e8f9', // Cyan 300
+                            DEFAULT: '#06b6d4', // Cyan 500
+                            dark: '#0e7490', // Cyan 700
+                        },
+                        ai: {
+                            light: '#a78bfa', // Violet 400
+                            DEFAULT: '#7c3aed', // Violet 600
+                            dark: '#4c1d95', // Violet 900
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Chart Container Rules */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Max width to prevent stretching */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Base height */
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Card Hover Effects */
+        .hover-card {
+            transition: all 0.3s ease;
+        }
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+    <!-- 
+        Palette Selected: Vibrant Cyan & Electric Purple (Cyber-Medical)
+        NO SVG used.
+        NO Mermaid JS used.
+        Narrative Plan: 
+        1. Context -> 2. The 5 Pillars -> 3. AI Architecture -> 4. Ministry Dashboard -> 5. Timeline -> 6. Impact
+    -->
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand selection:text-white">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-brand-dark to-ai-dark text-white pt-20 pb-24 px-6 rounded-b-[3rem] shadow-xl relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+            <!-- Decorative background pattern using CSS radial gradients -->
+            <div style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px; width: 100%; height: 100%;"></div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto text-center relative z-10">
+            <span class="inline-block py-1 px-3 rounded-full bg-white/20 backdrop-blur-sm text-sm font-semibold mb-4 border border-white/30">
+                RÉPUBLIQUE DÉMOCRATIQUE DU CONGO
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+                Écosystème National de <br/>
+                <span class="text-brand-light">Santé Connectée</span> Assisté par l'IA
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto font-light">
+                Une révolution numérique pour interconnecter le Ministère, les hôpitaux, les médecins, les pharmacies et les patients via un réseau unique et intelligent.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-6xl mx-auto -mt-16 px-4 md:px-8 pb-20 space-y-24 relative z-20">
+
+        <!-- Section 1: Context & Justification -->
+        <section id="context">
+            <div class="bg-white rounded-3xl shadow-lg p-8 md:p-12">
+                <div class="md:w-2/3">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4 border-l-4 border-brand pl-4">Le Défi Actuel : Fragmentation</h2>
+                    <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                        Aujourd'hui, le système de santé de la RDC souffre d'un manque de communication entre les acteurs. L'absence de données centralisées empêche le Ministère d'anticiper les crises, tandis que les patients peinent à suivre leur historique médical. Notre projet transforme cette fragmentation en un réseau unifié.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                    <!-- Stat Card 1 -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover-card">
+                        <div class="text-4xl mb-2">🧩</div>
+                        <h3 class="font-bold text-slate-800 text-lg">Système Fragmenté</h3>
+                        <p class="text-sm text-slate-500 mt-2">Absence de lien direct entre Hôpitaux et Pharmacies.</p>
+                    </div>
+                    <!-- Stat Card 2 -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover-card">
+                        <div class="text-4xl mb-2">🌫️</div>
+                        <h3 class="font-bold text-slate-800 text-lg">Données Opaques</h3>
+                        <p class="text-sm text-slate-500 mt-2">Aucune visibilité temps réel pour le Ministère.</p>
+                    </div>
+                    <!-- Stat Card 3 -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover-card">
+                        <div class="text-4xl mb-2">📉</div>
+                        <h3 class="font-bold text-slate-800 text-lg">Logistique Réactive</h3>
+                        <p class="text-sm text-slate-500 mt-2">Pénuries de médicaments non anticipées.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: The Solution (5 Pillars) -->
+        <section id="solution">
+            <div class="text-center mb-10 max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Les 5 Piliers de l'Écosystème</h2>
+                <p class="text-slate-600">
+                    La solution repose sur une plateforme centralisée interconnectant les 5 acteurs majeurs. Au centre : le Ministère, garant de la régulation et bénéficiaire d'une vision globale.
+                </p>
+            </div>
+
+            <!-- CSS Grid Layout for Entities -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Pillar 1: Ministry -->
+                <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-8 rounded-3xl shadow-xl col-span-1 md:col-span-2 lg:col-span-1 lg:row-span-2 flex flex-col justify-center items-center text-center border-t-8 border-brand">
+                    <div class="text-6xl mb-4">🏛️</div>
+                    <h3 class="text-2xl font-bold mb-2">Ministère de la Santé</h3>
+                    <div class="h-1 w-12 bg-brand rounded mb-4"></div>
+                    <p class="text-slate-300 text-sm mb-4">L'Administrateur Central & Régulateur.</p>
+                    <ul class="text-left text-sm space-y-2 w-full bg-white/10 p-4 rounded-xl">
+                        <li class="flex items-start"><span class="mr-2 text-brand">✓</span> Authentification des structures</li>
+                        <li class="flex items-start"><span class="mr-2 text-brand">✓</span> Tableau de bord décisionnel</li>
+                        <li class="flex items-start"><span class="mr-2 text-brand">✓</span> Surveillance épidémique IA</li>
+                    </ul>
+                </div>
+
+                <!-- Pillar 2: Hospitals -->
+                <div class="bg-white p-6 rounded-2xl shadow-md border-l-4 border-ai hover-card">
+                    <div class="flex items-center mb-3">
+                        <span class="text-3xl mr-3">🏥</span>
+                        <h3 class="font-bold text-xl text-slate-800">Hôpitaux</h3>
+                    </div>
+                    <p class="text-slate-600 text-sm">Gestion administrative et authentification des médecins via numéro d'ordre.</p>
+                </div>
+
+                <!-- Pillar 3: Doctors -->
+                <div class="bg-white p-6 rounded-2xl shadow-md border-l-4 border-ai hover-card">
+                    <div class="flex items-center mb-3">
+                        <span class="text-3xl mr-3">👨‍⚕️</span>
+                        <h3 class="font-bold text-xl text-slate-800">Médecins</h3>
+                    </div>
+                    <p class="text-slate-600 text-sm">Aide au diagnostic par IA, validation souveraine et ordonnance numérique.</p>
+                </div>
+
+                <!-- Pillar 4: Pharmacies -->
+                <div class="bg-white p-6 rounded-2xl shadow-md border-l-4 border-brand hover-card">
+                    <div class="flex items-center mb-3">
+                        <span class="text-3xl mr-3">💊</span>
+                        <h3 class="font-bold text-xl text-slate-800">Pharmacies</h3>
+                    </div>
+                    <p class="text-slate-600 text-sm">Gestion de stock intelligente et prédiction des ruptures par IA.</p>
+                </div>
+
+                <!-- Pillar 5: Patients -->
+                <div class="bg-white p-6 rounded-2xl shadow-md border-l-4 border-brand hover-card">
+                    <div class="flex items-center mb-3">
+                        <span class="text-3xl mr-3">👤</span>
+                        <h3 class="font-bold text-xl text-slate-800">Patients</h3>
+                    </div>
+                    <p class="text-slate-600 text-sm">Dossier médical numérique sécurisé, historique et localisation des médicaments.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: AI Engine -->
+        <section id="ai-engine" class="bg-white rounded-3xl shadow-xl overflow-hidden">
+            <div class="bg-ai text-white p-8 md:p-10">
+                <h2 class="text-3xl font-bold mb-2">Le Moteur Intelligence Artificielle</h2>
+                <p class="opacity-90 max-w-2xl">
+                    Le système utilise deux moteurs d'IA distincts : un pour l'assistance clinique (Supervised Learning) et un pour la prédiction logistique/épidémique (Time Series).
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
+                
+                <!-- Clinical Engine Visual -->
+                <div class="p-8 border-b md:border-b-0 md:border-r border-slate-100">
+                    <h3 class="text-xl font-bold text-ai-dark mb-4 flex items-center">
+                        <span class="bg-ai-light text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">A</span>
+                        Moteur Clinique (Diagnostic)
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-6">
+                        Analyse les symptômes et constantes pour suggérer des examens puis des traitements. Le graphique ci-dessous illustre l'amélioration de la précision diagnostic grâce à l'assistance IA (Données simulées).
+                    </p>
+                    
+                    <!-- CHART: Clinical Accuracy -->
+                    <div class="chart-container">
+                        <canvas id="clinicalChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-slate-400 mt-2 italic">Comparaison Précision: Standard vs Assisté par IA</p>
+                </div>
+
+                <!-- Predictive Engine Visual -->
+                <div class="p-8">
+                    <h3 class="text-xl font-bold text-brand-dark mb-4 flex items-center">
+                        <span class="bg-brand text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">B</span>
+                        Moteur Prédictif (Logistique)
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-6">
+                        Analyse les stocks en pharmacie et les tendances épidémiologiques pour prédire les ruptures de stock avant qu'elles n'arrivent.
+                    </p>
+                    
+                    <!-- CHART: Stock Prediction -->
+                    <div class="chart-container">
+                        <canvas id="stockChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-slate-400 mt-2 italic">L'IA détecte le point de rupture prévisionnel</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Ministry Dashboard (Simulated) -->
+        <section id="dashboard">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8">
+                <div class="max-w-2xl">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-3 border-l-4 border-brand pl-4">Tableau de Bord Ministère</h2>
+                    <p class="text-slate-600">
+                        Vue d'ensemble en temps réel pour la prise de décision. Détection automatique des anomalies sanitaires basée sur l'agrégation de données anonymisées.
+                    </p>
+                </div>
+                <div class="bg-green-100 text-green-700 px-4 py-2 rounded-lg text-sm font-bold flex items-center mt-4 md:mt-0">
+                    <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                    Système En Ligne
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- CHART: Epidemic Monitoring -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100">
+                    <h4 class="font-bold text-slate-700 mb-4 flex justify-between">
+                        Surveillance Épidémiologique
+                        <span class="text-xs font-normal text-slate-400 bg-slate-100 px-2 py-1 rounded">Derniers 30 jours</span>
+                    </h4>
+                    <div class="chart-container h-64">
+                        <canvas id="epidemicChart"></canvas>
+                    </div>
+                    <p class="text-sm text-slate-500 mt-4 border-t pt-2">
+                        <strong class="text-brand">Alerte IA:</strong> Le pic anormal détecté au jour 22 déclenche une notification automatique aux autorités sanitaires locales.
+                    </p>
+                </div>
+
+                <!-- CHART: Regional Distribution -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100">
+                    <h4 class="font-bold text-slate-700 mb-4">Répartition des Symptômes Signalés</h4>
+                    <div class="chart-container h-64 flex justify-center">
+                        <canvas id="symptomsChart"></canvas>
+                    </div>
+                    <p class="text-sm text-slate-500 mt-4 border-t pt-2">
+                        Agrégation des données saisies par les médecins pour identifier les pathologies dominantes par zone.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Timeline -->
+        <section id="roadmap" class="bg-slate-900 text-slate-300 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+             <!-- Decorative elements -->
+             <div class="absolute top-0 right-0 w-64 h-64 bg-brand opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+
+            <h2 class="text-3xl font-bold text-white mb-10 text-center">Calendrier de Déploiement</h2>
+
+            <div class="relative border-l-4 border-brand/30 ml-4 md:ml-1/2 md:transform md:-translate-x-1/2 space-y-12">
+                
+                <!-- Phase 1 -->
+                <div class="relative md:w-1/2 md:ml-auto pl-8 md:pl-12">
+                    <div class="absolute top-0 left-0 w-6 h-6 bg-brand rounded-full border-4 border-slate-900 transform -translate-x-[1.4rem] md:-translate-x-[1.4rem]"></div>
+                    <h3 class="text-xl font-bold text-white mb-2">Phase 1 : Conception & MVP</h3>
+                    <p class="text-sm text-brand-light font-mono mb-2">Mois 1-3</p>
+                    <p class="text-sm leading-relaxed">Développement des modules Ministère et Médecin. Entraînement initial des modèles d'IA sur les datasets historiques.</p>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="relative md:w-1/2 md:mr-auto md:text-right pl-8 md:pl-0 md:pr-12">
+                    <div class="absolute top-0 left-0 md:left-auto md:right-0 w-6 h-6 bg-ai rounded-full border-4 border-slate-900 transform -translate-x-[1.4rem] md:translate-x-[1.4rem]"></div>
+                    <h3 class="text-xl font-bold text-white mb-2">Phase 2 : Pilote & Déploiement</h3>
+                    <p class="text-sm text-ai-light font-mono mb-2">Mois 4-6</p>
+                    <p class="text-sm leading-relaxed">Lancement dans une zone pilote (ex: Kinshasa). Tests de sécurité et d'authentification en conditions réelles.</p>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="relative md:w-1/2 md:ml-auto pl-8 md:pl-12">
+                    <div class="absolute top-0 left-0 w-6 h-6 bg-white rounded-full border-4 border-slate-900 transform -translate-x-[1.4rem] md:-translate-x-[1.4rem]"></div>
+                    <h3 class="text-xl font-bold text-white mb-2">Phase 3 : Généralisation</h3>
+                    <p class="text-sm text-slate-400 font-mono mb-2">Mois 7+</p>
+                    <p class="text-sm leading-relaxed">Ouverture aux pharmacies, interconnexion complète et déploiement sur toute l'étendue du territoire national.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Impact & Conclusion -->
+        <section id="impact" class="text-center pb-12">
+            <h2 class="text-3xl font-bold text-slate-900 mb-12">Impact Attendu</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <!-- KPI 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-brand">
+                    <div class="text-5xl font-extrabold text-brand mb-2">100%</div>
+                    <p class="font-bold text-slate-700">Interconnexion</p>
+                    <p class="text-sm text-slate-500 mt-2">Visibilité totale sur les stocks et les soins.</p>
+                </div>
+                <!-- KPI 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-ai">
+                    <div class="text-5xl font-extrabold text-ai mb-2">-40%</div>
+                    <p class="font-bold text-slate-700">Pénuries Médicaments</p>
+                    <p class="text-sm text-slate-500 mt-2">Grâce à l'anticipation logistique IA.</p>
+                </div>
+                <!-- KPI 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-brand-dark">
+                    <div class="text-5xl font-extrabold text-brand-dark mb-2">24/7</div>
+                    <p class="font-bold text-slate-700">Surveillance</p>
+                    <p class="text-sm text-slate-500 mt-2">Détection immédiate des épidémies.</p>
+                </div>
+            </div>
+
+            <div class="bg-slate-100 rounded-2xl p-8 max-w-4xl mx-auto">
+                <p class="text-lg text-slate-700 italic">
+                    "Ce projet ne se contente pas de numériser l'existant ; il introduit une intelligence active au service de la santé publique congolaise, garantissant souveraineté et modernité."
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 text-center">
+        <p class="mb-2 text-white font-bold">Projet Santé Connectée RDC</p>
+        <p class="text-sm">Document de présentation pour Jury Technique</p>
+        <div class="mt-4 flex justify-center space-x-4 text-xs">
+            <span>© 2025 Tous droits réservés</span>
+            <span>Auteur du Projet : KATAY YIMBU Gad</span>
+            <span>•</span>
+            <span>Confidentiel</span>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- 1. Helper Function for Label Wrapping (16 chars) ---
+        function wrapLabel(label, maxLen = 16) {
+            if (label.length <= maxLen) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + 1 + words[i].length <= maxLen) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // --- 2. Common Options including Mandatory Tooltip Config ---
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: { family: 'Outfit', size: 12 },
+                        usePointStyle: true,
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(15, 23, 42, 0.9)', // Slate 900
+                    titleFont: { family: 'Outfit', size: 14 },
+                    bodyFont: { family: 'Outfit', size: 13 },
+                    padding: 12,
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                                return label.join(' ');
+                            } else {
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        // --- 3. Chart Initialization ---
+
+        // Chart A: Clinical Accuracy (Bar Chart)
+        const ctxClinical = document.getElementById('clinicalChart').getContext('2d');
+        new Chart(ctxClinical, {
+            type: 'bar',
+            data: {
+                labels: ['Diagnostic Paludisme', 'Détection Typhoïde', 'Prescription Adaptée'].map(l => wrapLabel(l)),
+                datasets: [
+                    {
+                        label: 'Méthode Classique',
+                        data: [75, 70, 80],
+                        backgroundColor: '#cbd5e1', // Slate 300
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Assisté par IA',
+                        data: [92, 88, 95],
+                        backgroundColor: '#7c3aed', // AI Purple
+                        borderRadius: 4
+                    }
+                ]
+            },
+            options: {
+                ...commonChartOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: { display: true, text: 'Précision (%)' }
+                    }
+                }
+            }
+        });
+
+        // Chart B: Stock Prediction (Line Chart)
+        const ctxStock = document.getElementById('stockChart').getContext('2d');
+        new Chart(ctxStock, {
+            type: 'line',
+            data: {
+                labels: ['Semaine 1', 'Semaine 2', 'Semaine 3', 'Semaine 4', 'Semaine 5', 'Semaine 6'],
+                datasets: [
+                    {
+                        label: 'Stock Réel (Paracétamol)',
+                        data: [500, 420, 350, 200, 100, 20],
+                        borderColor: '#06b6d4', // Brand Cyan
+                        backgroundColor: 'rgba(6, 182, 212, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: 'Seuil Critique (Alerte)',
+                        data: [150, 150, 150, 150, 150, 150],
+                        borderColor: '#ef4444', // Red
+                        borderDash: [5, 5],
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                ...commonChartOptions,
+                plugins: {
+                    ...commonChartOptions.plugins,
+                    annotation: {
+                        // Note: Annotation plugin not loaded, using text logic in description instead
+                    }
+                }
+            }
+        });
+
+        // Chart C: Epidemic Monitoring (Line Chart with Threshold)
+        const ctxEpidemic = document.getElementById('epidemicChart').getContext('2d');
+        new Chart(ctxEpidemic, {
+            type: 'line',
+            data: {
+                labels: Array.from({length: 30}, (_, i) => `Jour ${i+1}`), // 30 Days
+                datasets: [{
+                    label: 'Cas de Fièvre Signalés',
+                    data: [12, 15, 14, 13, 16, 15, 18, 14, 12, 15, 14, 18, 22, 25, 30, 45, 60, 85, 90, 80, 70, 60, 50, 45, 40, 35, 30, 25, 20, 18],
+                    borderColor: '#f59e0b', // Amber/Orange
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    fill: true,
+                    pointRadius: 2
+                }]
+            },
+            options: {
+                ...commonChartOptions,
+                scales: {
+                    x: { display: false }, // Hide x labels for clean look
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Chart D: Symptoms Distribution (Doughnut)
+        const ctxSymptoms = document.getElementById('symptomsChart').getContext('2d');
+        new Chart(ctxSymptoms, {
+            type: 'doughnut',
+            data: {
+                labels: ['Fièvre (Malaria?)', 'Toux / Grippe', 'Maux de Ventre', 'Traumatologie', 'Autres'].map(l => wrapLabel(l)),
+                datasets: [{
+                    data: [45, 20, 15, 10, 10],
+                    backgroundColor: [
+                        '#06b6d4', // Cyan
+                        '#7c3aed', // Purple
+                        '#f59e0b', // Amber
+                        '#10b981', // Emerald
+                        '#64748b'  // Slate
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                ...commonChartOptions,
+                cutout: '70%',
+                plugins: {
+                    ...commonChartOptions.plugins,
+                    legend: {
+                        position: 'right',
+                        labels: { boxWidth: 12, font: {size: 11} }
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
